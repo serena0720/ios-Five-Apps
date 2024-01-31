@@ -6,13 +6,14 @@
 import SwiftUI
 
 struct TodoListView: View {
-  var body: some View {
-    Text("Todo List")
-  }
+    @EnvironmentObject private var pathModel: PathModel
+    @EnvironmentObject private var todoListViewModel: TodoListViewModel
 }
 
 struct TodoListView_Previews: PreviewProvider {
-  static var previews: some View {
-    TodoListView()
-  }
+    static var previews: some View {
+        TodoListView()
+            .environmentObject(PathModel())
+            .environmentObject(TodoListViewModel())
+    }
 }
