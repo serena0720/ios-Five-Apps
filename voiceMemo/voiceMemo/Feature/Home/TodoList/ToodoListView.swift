@@ -25,8 +25,14 @@ struct TodoListView: View {
                         .frame(height: 30)
                 }
                 TitleView()
+                    .padding(.top, 20)
                 
-                AnnouncementView()
+                if todoListViewModel.todos.isEmpty {
+                    AnnouncementView()
+                } else {
+                    TodoListContentView()
+                        .padding(.top, 20)
+                }
             }
         }
     }
