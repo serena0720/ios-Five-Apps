@@ -59,6 +59,36 @@ private struct TodoTitleView: View {
     }
 }
 
+//MARK: - SelectTimeView
+private struct SelectTimeView: View {
+    @ObservedObject private var todoViewModel: TodoViewModel
+    
+    fileprivate init(todoViewModel: TodoViewModel) {
+        self.todoViewModel = todoViewModel
+    }
+    
+    fileprivate var body: some View {
+        VStack {
+            Rectangle()
+                .fill(Color.customGray0)
+                .frame(height: 1)
+            
+            DatePicker(
+                "",
+                selection: $todoViewModel.time,
+                displayedComponents: [.hourAndMinute]
+            )
+            .labelsHidden()
+            .datePickerStyle(WheelDatePickerStyle())
+            .frame(maxWidth: .infinity, alignment: .center)
+            
+            Rectangle()
+                .fill(Color.customGray0)
+                .frame(height: 1)
+        }
+    }
+}
+
 }
 
 struct TodoView_Previews: PreviewProvider {
