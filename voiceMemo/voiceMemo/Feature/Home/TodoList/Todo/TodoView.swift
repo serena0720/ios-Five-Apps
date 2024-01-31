@@ -29,6 +29,22 @@ struct TodoView: View {
                 },
                 rightBtnType: .create
             )
+            
+            TitleView()
+                .padding(.top, 20)
+            
+            Spacer()
+                .frame(height: 20)
+            
+            TodoTitleView(todoViewModel: todoViewModel)
+                .padding(.leading, 20)
+            
+            SelectedTimeView(todoViewModel: todoViewModel)
+            
+            SelectDayView(todoViewModel: todoViewModel)
+                .padding(.leading, 20)
+            
+            Spacer()
         }
     }
 }
