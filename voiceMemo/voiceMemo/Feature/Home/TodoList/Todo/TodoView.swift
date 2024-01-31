@@ -39,7 +39,7 @@ struct TodoView: View {
             TodoTitleView(todoViewModel: todoViewModel)
                 .padding(.leading, 20)
             
-            SelectedTimeView(todoViewModel: todoViewModel)
+            SelectTimeView(todoViewModel: todoViewModel)
             
             SelectDayView(todoViewModel: todoViewModel)
                 .padding(.leading, 20)
@@ -144,9 +144,9 @@ private struct SelectDayView: View {
                     .onChange(of: todoViewModel.day) { _ in
                         todoViewModel.setIsDisplayCalendar(false)
                     }
-                    
-                    Spacer()
                 }
+                
+                Spacer()
             }
         }
     }
