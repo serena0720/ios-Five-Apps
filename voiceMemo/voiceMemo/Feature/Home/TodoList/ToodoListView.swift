@@ -93,13 +93,74 @@ private struct TodoListContentView: View {
                         .frame(height: 1)
                     
                     ForEach(todoListViewModel.todos, id: \Todo.self) { todo in
-                        // TODO
+                        TodoCellView(todo: todo)
                     }
                 })
             }
         }
     }
 }
+
+// MARK: - Todo 셀 뷰
+private struct TodoCellView: View {
+    @EnvironmentObject private var todoListViewModel: TodoListViewModel
+    @State private var isRemovedSelected: Bool
+    private var todo: Todo
+    
+    fileprivate init(
+        isRemovedSelected: Bool = false,
+        todo: Todo
+    ) {
+        _isRemovedSelected = State(initialValue: isRemovedSelected)
+        self.todo = todo
+    }
+    
+    fileprivate var body: some View {
+        VStack(spacing: 20) {
+            HStack {
+                if !todoListViewModel.isEditTodoMode {
+                    Button(
+                        action: { todoListViewModel.selectedBoxTapped(todo) },
+                        label: {
+                            todo.selected ? Image("selectedBox") : Image("unselectedBox")
+                        }
+                    )
+                }
+                
+                VStack(alignment: .leading, spacing: 5) {
+                    Text(todo.title)
+                        .font(.system(size: 16))
+                        .foregroundColor(todo.selected ? .customIconGray : .customBlack)
+                    
+                    Text(todo.convertedDayAndTime)
+                        .font(.system(size: 16))
+                        .foregroundColor(.customIconGray)
+                }
+                
+                Spacer()
+                
+                if todoListViewModel.isEditTodoMode {
+                    Button(
+                        action: {
+                            isRemovedSelected.toggle()
+                            todoListViewModel.todoRemoveSelectedBoxTapped(todo)
+                        },
+                        label: {
+                            isRemovedSelected ? Image("selectedBox") : Image("unSelectedBox")
+                        }
+                    )
+                }
+            }
+            .padding(.horizontal, 20)
+            .padding(.top, 10)
+            
+            Rectangle()
+                .fill(Color.customGray0)
+                .frame(height: 1)
+        }
+    }
+}
+
 struct TodoListView_Previews: PreviewProvider {
     static var previews: some View {
         TodoListView()
