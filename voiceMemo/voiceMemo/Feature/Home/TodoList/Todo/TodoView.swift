@@ -46,6 +46,19 @@ private struct TitleView: View {
     }
 }
 
+// MARK: - TodoTitleView
+private struct TodoTitleView: View {
+    @ObservedObject private var todoViewModel: TodoViewModel
+    
+    fileprivate init(todoViewModel: TodoViewModel) {
+        self.todoViewModel = todoViewModel
+    }
+    
+    fileprivate var body: some View {
+        TextField("제목을 입력하세요", text: $todoViewModel.title)
+    }
+}
+
 }
 
 struct TodoView_Previews: PreviewProvider {
