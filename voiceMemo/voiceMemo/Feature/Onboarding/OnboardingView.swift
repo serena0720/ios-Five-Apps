@@ -24,7 +24,12 @@ private struct OnboardingContentView: View {
     fileprivate var body: some View {
         VStack {
             OnboardingCellListView(onboardingViewModel: onboardingViewModel)
+            
+            Spacer()
+            
+            StartBtnView()
         }
+        .ignoresSafeArea(edges: .top)
     }
 }
 
@@ -96,6 +101,28 @@ private struct OnboardingCellView: View {
             .cornerRadius(0)
         }
         .shadow(radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
+    }
+}
+
+// MARK: - 시작하기 버튼 뷰
+private struct StartBtnView: View {
+    fileprivate var body: some View {
+        Button(
+            action: { },
+            label: {
+                HStack {
+                    Text("시작하기")
+                        .font(.system(size: 16, weight: .medium))
+                        .foregroundColor(.customGreen)
+                    
+                    // 아이콘에 색상을 줄 수 있음
+                    Image("startHome")
+                        .renderingMode(.template)
+                        .foregroundColor(.customGreen)
+                }
+            }
+        )
+        .padding(.bottom, 50)
     }
 }
 
