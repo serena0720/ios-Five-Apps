@@ -89,6 +89,51 @@ private struct SelectTimeView: View {
     }
 }
 
+// MARK: - SelectDayView
+private struct SelectDayView: View {
+    @ObservedObject private var todoViewModel: TodoViewModel
+    
+    fileprivate init(todoViewModel: TodoViewModel) {
+        self.todoViewModel = todoViewModel
+    }
+    
+    fileprivate var body: some View {
+        VStack(spacing: 5) {
+            HStack {
+                Text("날짜")
+                    .foregroundStyle(Color.customIconGray)
+                
+                Spacer()
+            }
+            
+            HStack {
+                Button(
+                    action: { todoViewModel.setIsDisplayCalendar(true) },
+                    label: {
+                        Text("\(todoViewModel.day.formattedDay)")
+                            .font(.system(size: 18, weight: .medium))
+                            .foregroundStyle(Color.customGreen)
+                    }
+                )
+                .popover(isPresented: $todoViewModel.isDisplayCalendar) {
+                    DatePicker(
+                        "",
+                        selection: $todoViewModel.day,
+                        displayedComponents: .date
+                    )
+                    .labelsHidden()
+                    .datePickerStyle(GraphicalDatePickerStyle())
+                    .frame(maxWidth: .infinity, alignment: .center)
+                    .padding()
+                    .onChange(of: todoViewModel.day) { _ in
+                        todoViewModel.setIsDisplayCalendar(false)
+                    }
+                    
+                    Spacer()
+                }
+            }
+        }
+    }
 }
 
 struct TodoView_Previews: PreviewProvider {
