@@ -71,6 +71,35 @@ private struct AnnouncementView: View {
     }
 }
 
+// MARK: - TodoList 컨텐츠 뷰
+private struct TodoListContentView: View {
+    @EnvironmentObject private var todoListViewModel: TodoListViewModel
+    
+    fileprivate var body: some View {
+        VStack {
+            HStack {
+                Text("할일 목록")
+                    .font(.system(size: 16, weight: .bold))
+                    .padding(.leading, 20)
+                
+                Spacer()
+            }
+            
+            ScrollView(.vertical) {
+                VStack(spacing: 0,
+                       content: {
+                    Rectangle()
+                        .fill(Color.customGray0)
+                        .frame(height: 1)
+                    
+                    ForEach(todoListViewModel.todos, id: \Todo.self) { todo in
+                        // TODO
+                    }
+                })
+            }
+        }
+    }
+}
 struct TodoListView_Previews: PreviewProvider {
     static var previews: some View {
         TodoListView()
