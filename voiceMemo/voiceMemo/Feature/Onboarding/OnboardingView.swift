@@ -125,9 +125,11 @@ private struct OnboardingCellView: View {
 
 // MARK: - 시작하기 버튼 뷰
 private struct StartBtnView: View {
+    @EnvironmentObject private var pathModel: PathModel
+    
     fileprivate var body: some View {
         Button(
-            action: { },
+            action: { pathModel.paths.append(.homeView) },
             label: {
                 HStack {
                     Text("시작하기")
