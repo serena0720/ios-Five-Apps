@@ -32,6 +32,20 @@ struct TodoView: View {
         }
     }
 }
+
+// MARK: - TitleView
+private struct TitleView: View {
+    fileprivate var body: some View {
+        HStack {
+            Text("To do List를\n추가해 보세요.")
+            
+            Spacer()
+        }
+        .font(.system(size: 30, weight: .bold))
+        .padding(.leading, 20)
+    }
+}
+
 }
 
 struct TodoView_Previews: PreviewProvider {
