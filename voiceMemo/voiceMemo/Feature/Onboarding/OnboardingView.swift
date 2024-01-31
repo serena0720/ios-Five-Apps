@@ -28,6 +28,46 @@ private struct OnboardingContentView: View {
     }
 }
 
+//MARK: - 온보딩 셀 뷰
+private struct OnboardingCellView: View {
+    private var onboardingContent: OnboardingContent
+    
+    fileprivate init(onboardingContent: OnboardingContent) {
+        self.onboardingContent = onboardingContent
+    }
+    
+    fileprivate var body: some View {
+        VStack {
+            Image(onboardingContent.imageFileName)
+                .resizable()
+                .scaledToFit()
+            
+            HStack {
+                Spacer()
+                
+                VStack {
+                    Spacer()
+                        .frame(height: 46)
+                    
+                    Text(onboardingContent.title)
+                        .font(.system(size: 16, weight: .bold))
+                    
+                    Spacer()
+                        .frame(height: 5)
+                    
+                    Text(onboardingContent.subTitle)
+                        .font(.system(size: 16))
+                }
+                
+                Spacer()
+            }
+            .background(Color.customWhite)
+            .cornerRadius(0)
+        }
+        .shadow(radius: /*@START_MENU_TOKEN@*/10/*@END_MENU_TOKEN@*/)
+    }
+}
+
 struct OnboardingView_Previews: PreviewProvider {
     static var previews: some View {
         OnboardingView()
