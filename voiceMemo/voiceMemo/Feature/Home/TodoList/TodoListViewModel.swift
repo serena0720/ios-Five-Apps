@@ -30,4 +30,47 @@ class TodoListViewModel: ObservableObject {
         self.isDisplayRemoveTodoAlert = isDisplayRemoveTodoAlert
     }
 }
+
+extension TodoListViewModel {
+    func selectedBoxTapped(_ todo: Todo) {
+        if let index = todos.firstIndex(of: todo) {
+            todos[index].selected.toggle()
+        }
+    }
+    
+    func addTodo(_ todo: Todo) {
+        todos.append(todo)
+    }
+    
+    func navigationRightBtnTapped() {
+        if isEditTodoMode {
+            if removeTodos.isEmpty {
+                isEditTodoMode = false
+            } else {
+                setIsDisplayRemoveTodoAlert(true)
+            }
+        } else {
+            isEditTodoMode = true
+        }
+    }
+    
+    func setIsDisplayRemoveTodoAlert(_ isDisplay: Bool) {
+        isDisplayRemoveTodoAlert = isDisplay
+    }
+    
+    func todoRemoveSelectedBoxTapped(_ todo: Todo) {
+        if let index = removeTodos.firstIndex(of: todo) {
+            removeTodos.remove(at: index)
+        } else {
+            removeTodos.append(todo)
+        }
+    }
+    
+    func removeBtnTapped() {
+        todos.removeAll { todo in
+            removeTodos.contains(todo)
+        }
+        removeTodos.removeAll()
+        isEditTodoMode = false
+    }
 }
